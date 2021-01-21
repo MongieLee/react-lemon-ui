@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "outDir": "dist",
     "declaration": true,
     "baseUrl": ".",
     "module": "esnext",
@@ -20,8 +21,7 @@
     "allowSyntheticDefaultImports": true,
     "noUnusedLocals": true
   },
-  "include": [
-  ],
+  "include": [],
   "exclude": [
     "node_modules",
     "build",
