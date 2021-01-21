@@ -2,10 +2,11 @@ const path = require('path');
 module.exports = {
   mode: 'production',
   entry: {
-    rlui: './lib/index.tsx',
+    index: './lib/index.tsx',
   },
   output: {
     path: path.resolve(__dirname, 'dist/lib'),
+    library: 'rlui',
     libraryTarget: 'umd',
   },
   module: {
