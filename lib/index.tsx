@@ -1,3 +1,5 @@
-import Button from './button';
+import * as React from "react";
+import ReactDOM from "react-dom";
 
-export { Button };
+import Icon from "./icon";
+ReactDOM.render(<Icon name="wechat" />, document.body);
