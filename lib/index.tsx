@@ -4,6 +4,6 @@ const fn: React.MouseEventHandler = () => console.log("irun");
 
 import Icon from "./icon";
 ReactDOM.render(
-  <Icon onClick={fn} name="wechat" />,
+  <Icon onClick={fn} className="ddssds" name="wechat" />,
   document.querySelector("#root")
 );
