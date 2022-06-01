@@ -11,7 +11,7 @@
     "quotemark": [true, "single", "jsx-double"],
     "member-access": false,
     "semicolon": [true, "always", "ignore-bound-class-methods"],
-    "no-unused-expression": [true, "allow-fast-null-checks"],
+//    "no-unused-expression": [true, "allow-fast-null-checks"],
     "member-ordering": false,
     "trailing-comma": false,
     "arrow-parens": false,
