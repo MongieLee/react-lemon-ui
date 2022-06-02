@@ -1,8 +1,9 @@
-import React, {FC, ReactNode, useEffect, useRef, useState} from 'react';
+import React, {FC, useEffect, useRef} from 'react';
 import "./message.scss"
 import classes from "../utils/classes";
 import ReactDOM from "react-dom";
 import {messageContainer} from "./bootstrap"
+import Icon from "../icon/icon"
 
 export interface MessageProps {
   duration?: number;
@@ -15,31 +16,31 @@ export interface MessageProps {
   componentId: string;
 }
 
-
 const Message: FC<MessageProps> = (props) => {
+  const {componentId, duration, content, mode} = props
   const container = useRef<HTMLDivElement>(null);
-  const [visible, setVisible] = useState(true);
   useEffect(() => {
     const stId = setTimeout(() => {
-        // setVisible(false)
-        const htmlDivElement = messageContainer.get(props.componentId);
-        console.log(htmlDivElement)
+        const wrapperEle = messageContainer.get(componentId);
         ReactDOM.unmountComponentAtNode(container.current!.parentElement as HTMLDivElement)
-        // container.current!.parentElement?.remove()
+        wrapperEle!.remove();
       },
-      props.duration ? props.duration * 1000 : 3000)
+      (typeof duration === 'number') ? duration * 1000 : 3000)
     return () => {
       if (stId) {
         window.clearTimeout(stId)
       }
-      console.log("组件销毁了")
     };
   }, []);
 
-  return (<div className={classes("lemon-message-container")} ref={container}>
-    <div className={classes("message")}>test</div>
-  </div>)
+  return (
+    <div className={classes("lm-message-container")}
+         ref={container}>
+      <div className={classes("lm-message")}>
+        <Icon className={"icon"} name={mode}/>
+        <div className={'content'}>{content}</div>
+      </div>
+    </div>)
 }
-
 
 export default Message;

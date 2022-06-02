@@ -1,18 +1,39 @@
-.lemon-message-container {
-  display: inline-flex;
-  padding: 4px 8px;
-  border: 1px solid red;
+.lm-message-container {
   position: fixed;
-  top: 0;
   left: 50%;
   z-index: 999;
+  top: 20px;
+  transform: translateX(-50%);
 
-  .message {
-    line-height: 1.8;
+  .lm-message {
+    display: flex;
     align-items: center;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     border-radius: 4px;
     font-size: 14px;
     background: white;
+    animation: slide-up 500ms;
+    padding: 10px 16px;
+    pointer-events: all;
+
+    .icon {
+      width: 1.2em;
+      height: 1.2em;
+    }
+
+    .content {
+      margin-left: 8px;
+    }
+  }
+}
+
+@keyframes slide-up {
+  0% {
+    opacity: 0;
+    transform: translateY(-100%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0%);
   }
 }
