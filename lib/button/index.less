@@ -1,0 +1,50 @@
+@base-primary-color: #448ef7;
+@danger-primary-color: #ec5b56;
+
+.lm-button {
+  border: 1px solid #d9d9d9;
+  display: inline-block;
+  border-radius: 4px;
+  outline: none;
+  background: none;
+  padding: 0 14px;
+  height: 30px;
+  line-height: 30px;
+  transition: all .3s;
+
+  &:hover {
+    cursor: pointer;
+    border-color: @base-primary-color;
+    color: @base-primary-color;
+  }
+
+  &.primary {
+    background: @base-primary-color;
+    color: white;
+
+    &:hover {
+      background: red;
+      background: #40a9ff;
+      border-color: #40a9ff;
+    }
+  }
+
+  &.danger {
+    background: @danger-primary-color;
+    color: white;
+
+    &:hover {
+      background: #ee8079;
+      border-color: #ee8079;
+    }
+  }
+
+  &.ghost {
+    border-style: dashed;
+  }
+
+  &.link{
+    border: none;
+    background: none;
+  }
+}

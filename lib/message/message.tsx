@@ -1,5 +1,5 @@
 import React, {FC, useEffect, useRef} from 'react';
-import "./message.scss"
+import "./message.less"
 import classes from "../utils/classes";
 import ReactDOM from "react-dom";
 import {messageContainer} from "./bootstrap"

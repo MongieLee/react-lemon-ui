@@ -3,30 +3,23 @@ import ReactDOM from "react-dom";
 import Icon from "./icon/icon";
 import Pagination from "./pagination/pagination";
 import message from "./message/bootstrap";
+import Button from "./button/button";
 
 const fn: React.MouseEventHandler = () => console.log("irun");
 
 const App = () => {
   return (
     <>
-      <button onClick={() => {
+      <Button onClick={() => {
         message.success({content: "删除成功"});
-      }}>dinaji
-      </button>
-      <button onClick={() => {
-        message.error({content: "删除失败"});
-      }}>error
-      </button>
-      <button onClick={(event) => {
-        message.warning({content: "操作异常"});
-      }}>success
-      </button>
-      <button onClick={() => {
-        message.info({content: "操作提示"});
-      }}>info
-      </button>
-
+      }} type={"primary"}>primary</Button>
+      <Button>default</Button>
+      <Button type={"danger"}>danger</Button>
+      <Button type={"ghost"}>ghost</Button>
+      <Button type={"link"}>link</Button>
+      <hr/>
       <Icon onClick={fn} className="ddssds" name="wechat"/>
+      <hr/>
       <Pagination
         total={202}
         currentPage={1}

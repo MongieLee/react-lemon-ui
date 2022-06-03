@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./pagination.scss";
+import "./pagination.less";
 
 interface PaginationProps {
   preBtnText?: string;
