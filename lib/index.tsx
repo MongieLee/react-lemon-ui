@@ -4,12 +4,14 @@ import Icon from "./icon/icon";
 import Pagination from "./pagination/pagination";
 import message from "./message/bootstrap";
 import Button from "./button/button";
+import Modal from "./modal/modal";
 
-const fn: React.MouseEventHandler = () => console.log("irun");
 
 const App = () => {
   return (
     <>
+      <Modal visible={true}/>
+      <hr/>
       <Button onClick={() => {
         message.success({content: "删除成功"});
       }} type={"primary"}>primary</Button>
@@ -18,7 +20,7 @@ const App = () => {
       <Button type={"ghost"}>ghost</Button>
       <Button type={"link"}>link</Button>
       <hr/>
-      <Icon onClick={fn} className="ddssds" name="wechat"/>
+      <Icon name="wechat"/>
       <hr/>
       <Pagination
         total={202}
