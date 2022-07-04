@@ -5,12 +5,17 @@ import Pagination from "./pagination/pagination";
 import message from "./message/bootstrap";
 import Button from "./button/button";
 import Modal from "./modal/modal";
-
+import "./index.less";
+import {useState} from "react";
 
 const App = () => {
+  const [visible, setVisible] = useState(false);
+
   return (
     <>
-      <Modal visible={true}/>
+      <Modal visible={visible} maskClosable onCancelClick={() => setVisible(false)} onOkClick={() => setVisible(false)} >
+        <div>123</div>
+      </Modal>
       <hr/>
       <Button onClick={() => {
         message.success({content: "删除成功"});
@@ -18,7 +23,7 @@ const App = () => {
       <Button>default</Button>
       <Button type={"danger"}>danger</Button>
       <Button type={"ghost"}>ghost</Button>
-      <Button type={"link"}>link</Button>
+      <Button onClick={() => setVisible(!visible)} type={"link"}>link</Button>
       <hr/>
       <Icon name="wechat"/>
       <hr/>
