@@ -28,6 +28,10 @@ module.exports = {
         test: /\.less$/,
         use: ["style-loader", "css-loader", "less-loader"],
       },
+      {
+        test: /\.(png|jpg|gif)$/i,
+        use: ["file-loader"]
+      }
     ],
   },
   // plugins: [

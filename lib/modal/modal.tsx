@@ -16,10 +16,8 @@ interface ModalProps {
   title?: string;
 }
 
-const Modal: FC<PropsWithChildren<ModalProps>> = ({
-                                                    children, visible, footer, maskClosable, okText,
-                                                    onOkClick, cancelText, onCancelClick, title
-                                                  }) => {
+const Modal: FC<PropsWithChildren<ModalProps>> = (props) => {
+  const {children, visible, footer, maskClosable, okText, onOkClick, cancelText, onCancelClick, title} = props
   const ele = useRef<HTMLDivElement>(null);
   const onMaskClickHandler: MouseEventHandler = (e) => {
     maskClosable && onCancelClickHandler(e);

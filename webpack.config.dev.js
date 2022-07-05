@@ -8,5 +8,5 @@ module.exports = Object.assign({}, base, {
       title: 'react-lemon-ui',
       template: 'index.html',
     }),
-  ],
+  ]
 });

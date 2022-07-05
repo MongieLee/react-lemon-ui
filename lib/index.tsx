@@ -5,6 +5,7 @@ import Pagination from "./pagination/pagination";
 import message from "./message/bootstrap";
 import Button from "./button/button";
 import Modal from "./modal/modal";
+import Carousel from "./carousel/carousel";
 import "./index.less";
 import {useState} from "react";
 
@@ -13,7 +14,11 @@ const App = () => {
 
   return (
     <>
-      <Modal visible={visible} maskClosable onCancelClick={() => setVisible(false)} onOkClick={() => setVisible(false)} >
+      <Carousel>
+        <div>123</div>
+        <div>abc</div>
+      </Carousel>
+      <Modal visible={visible} maskClosable onCancelClick={() => setVisible(false)} onOkClick={() => setVisible(false)}>
         <div>123</div>
       </Modal>
       <hr/>

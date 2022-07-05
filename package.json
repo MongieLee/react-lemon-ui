@@ -26,6 +26,7 @@
     "awesome-typescript-loader": "^5.2.1",
     "cross-env": "^7.0.3",
     "css-loader": "^5.0.1",
+    "file-loader": "^6.2.0",
     "html-webpack-plugin": "^4.5.1",
     "less": "^4.1.2",
     "less-loader": "7",
