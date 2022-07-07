@@ -1,8 +1,5 @@
-import React, {useRef} from "react";
+import React, {MouseEventHandler, ReactNode, useEffect, useRef, useState} from "react";
 import {PropsWithChildren} from "react";
-import p1 from "./assets/1.jpg"
-import p2 from "./assets/2.jpg"
-import p3 from "./assets/3.jpg"
 import classes from "../utils/classes";
 import "./carousel.less"
 import Icon from "../icon/icon";
@@ -16,31 +13,81 @@ interface CarouselProps {
 }
 
 const Carousel: React.FC<PropsWithChildren<CarouselProps>> = (props) => {
-  console.log(props);
-  const next = () => {
+  const {autoplay, children, arrowsVisible = true} = props;
+
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [resultChildren] = useState((): ReactNode[] => {
+    let result: ReactNode[] = []
+    if (children instanceof Array) {
+      if (children.length > 1) {
+        const last = children[0]
+        const first = children[children.length - 1]
+        result = [first, ...children, last]
+      }
+    }
+    return result
+  });
+  const slickDotsList = resultChildren.length ? new Array(resultChildren.length - 2).fill(true) : []
+
+  const next: MouseEventHandler = (e) => {
+    if (activeIndex === slickDotsList.length - 1) {
+      wrapperRef.current!.style.transform = `translateX(0%)`
+      wrapperRef.current!.style.transition = `none`
+      goTo(0)
+    } else {
+      goTo(activeIndex + 1)
+    }
   }
-  const pre = () => {
+  const pre: MouseEventHandler = (e) => {
+    if (activeIndex === 0) {
+      wrapperRef.current!.style.transform = `translateX(-${resultChildren.length - 1}00%)`
+      wrapperRef.current!.style.transition = `none`
+      goTo(slickDotsList.length - 1)
+    } else {
+      goTo(activeIndex - 1)
+    }
   }
   const goTo = (index) => {
+    setActiveIndex(index)
+    wrapperRef.current!.style.transition = `all .5s`
+    wrapperRef.current!.style.transform = `translateX(-${index + 1}00%)`
   }
-  const generateSlickDots = ()=>{
-    return [1,2,3]
-  }
+  useEffect(() => {
+    let id;
+    const init = () => {
+      // if (autoplay) {
+      //   id = setInterval(() => {
+      //     goTo(activeIndex + 1)
+      //   }, 2000)
+      // }
+    }
+    init()
+    return () => {
+      if (id) clearInterval(id)
+    }
+  });
 
   const wrapperRef = useRef<HTMLDivElement>(null);
-  const {children} = props
-  return <div className={classes('lm-carousel-wrapper')} ref={wrapperRef}>
-    <div></div>
-    <Icon name={'arrow-left'}/>
-    <Icon name={'arrow-right'}/>
-   <div></div>
-    {/*{*/}
-    {/*  [p1, p2, p3].map(item => {*/}
-    {/*    return (<div><img src={item} alt={'carousel'}/></div>)*/}
-    {/*  })*/}
-    {/*}*/}
-    {children}
-  </div>
+  return (
+    <div className={classes('lm-carousel')}>
+      {resultChildren.length ? <>
+        {arrowsVisible &&
+          <Icon onClick={(e) => pre(e)}
+                className={classes('lm-carousel-helper lm-carousel-arrow lm-carousel-left-arrow')}
+                name={'arrow-left'}/>}
+        {arrowsVisible && <Icon onClick={(e) => next(e)}
+                                className={classes('lm-carousel-helper lm-carousel-arrow lm-carousel-right-arrow')}
+                                name={'arrow-right'}/>}
+      </> : null}
+      <div className={classes('lm-carousel-wrapper')} ref={wrapperRef} style={{transform: `translateX(-100%)`}}>
+        {resultChildren.length ? resultChildren : children}
+      </div>
+      {slickDotsList ? <div
+        className={classes('lm-carousel-helper lm-carousel-slick-dots')}>
+        {slickDotsList.map((_, index) => <div onClick={() => goTo(index)}
+                                              className={classes('lm-carousel-slick-dots-item', index == activeIndex ? 'active' : '')}/>)}
+      </div> : null}
+    </div>)
 }
 
 export default Carousel;
