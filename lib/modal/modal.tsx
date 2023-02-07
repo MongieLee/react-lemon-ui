@@ -33,7 +33,10 @@ const Modal: FC<PropsWithChildren<ModalProps>> = (props) => {
   }
 
   const onOkClickHandler: MouseEventHandler = (e) => {
-    onOkClick && onOkClick(e);
+    ele.current!.className = ele.current!.className += ` lm-modal-fade-out`
+    setTimeout(() => {
+      onOkClick && onOkClick(e);
+    },)
   }
 
   const instance = visible && (<>

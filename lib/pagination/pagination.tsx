@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, {useState} from "react";
 import "./pagination.less";
 
 interface PaginationProps {
@@ -20,6 +20,7 @@ interface PaginationState {
 
 interface pageOmitProps {
   title: string;
+
   onClick(): void;
 }
 
@@ -39,31 +40,31 @@ const Pagination: React.FC<PaginationProps> = (props) => {
     inputValue: "", //快速跳转输入框值
   });
   const pageChange = (currentPage: number) => {
-    const { currentPage: stateCurrentPage } = state;
+    const {currentPage: stateCurrentPage} = state;
     if (currentPage === stateCurrentPage) return;
-    setState({ ...state, currentPage });
+    setState({...state, currentPage});
     props.onPageChange.call(undefined, currentPage);
   };
 
   const nextPageChange = () => {
-    let { currentPage, totalPageSize } = state;
+    let {currentPage, totalPageSize} = state;
     if (currentPage === totalPageSize) return;
     pageChange(currentPage + 1);
   };
 
   const prePageChange = () => {
-    let { currentPage } = state;
+    let {currentPage} = state;
     if (currentPage === 1) return;
     pageChange(currentPage - 1);
   };
 
   const preOmitPageChange = () => {
-    const { currentPage } = state;
+    const {currentPage} = state;
     pageChange(currentPage - 5);
   };
 
   const nextOmitPageChange = () => {
-    const { currentPage } = state;
+    const {currentPage} = state;
     pageChange(currentPage + 5);
   };
 
@@ -72,7 +73,7 @@ const Pagination: React.FC<PaginationProps> = (props) => {
     if (event.key === "Enter") {
       //keyCode为13就是回车
       const value = parseInt(event.currentTarget.value.toString());
-      const { currentPage, totalPageSize } = state;
+      const {currentPage, totalPageSize} = state;
       if (isNaN(value)) {
         setState({
           ...state,
@@ -82,7 +83,7 @@ const Pagination: React.FC<PaginationProps> = (props) => {
         //如果输入的合法数字大于总页数，则跳转至最后一页
         if (totalPageSize === currentPage) {
           //如果当前已经是第一页，则只清空输入框
-          setState({ ...state, inputValue: "" });
+          setState({...state, inputValue: ""});
         } else {
           setState({
             ...state,
@@ -95,13 +96,13 @@ const Pagination: React.FC<PaginationProps> = (props) => {
         //如果输入的合法数字大于总页数，则跳转至最后一页
         if (1 === currentPage) {
           //如果当前已经是最后一页，则只清空输入框
-          setState({ ...state, inputValue: "" });
+          setState({...state, inputValue: ""});
         } else {
-          setState({ ...state, currentPage: 1, inputValue: "" });
+          setState({...state, currentPage: 1, inputValue: ""});
           props.onPageChange.call(undefined, 1);
         }
       } else if (state.currentPage === parseInt(value.toString())) {
-        setState({ ...state, inputValue: "" });
+        setState({...state, inputValue: ""});
       } else {
         setState({
           ...state,
@@ -114,15 +115,15 @@ const Pagination: React.FC<PaginationProps> = (props) => {
   };
 
   const inputChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setState({ ...state, inputValue: event.target.value.toString() });
+    setState({...state, inputValue: event.target.value.toString()});
   };
 
   const initPage = () => {
-    const { nextBtnText, preBtnText } = props;
-    const { totalPageSize, currentPage } = state;
-    let contentList = [];
+    const {nextBtnText, preBtnText} = props;
+    const {totalPageSize, currentPage} = state;
+    let contentList: any = [];
     if (totalPageSize <= 9) {
-      contentList = Array.from({ length: 9 - 2 }).map((_, i) => {
+      contentList = Array.from({length: 9 - 2}).map((_, i) => {
         return (
           <li
             onClick={() => pageChange(i + 1)}
@@ -149,7 +150,7 @@ const Pagination: React.FC<PaginationProps> = (props) => {
           onClick={preOmitPageChange}
         />,
       ].concat(
-        Array.from({ length: 9 - 2 }).map((_, i) => {
+        Array.from({length: 9 - 2}).map((_, i) => {
           return (
             <li
               onClick={() => pageChange(i + totalPageSize - 9 + 3)}
@@ -166,7 +167,7 @@ const Pagination: React.FC<PaginationProps> = (props) => {
         })
       );
     } else if (currentPage - 4 <= 1) {
-      contentList = Array.from({ length: 9 - 2 })
+      contentList = Array.from({length: 9 - 2})
         .map((_, i) => {
           return (
             <li
@@ -205,7 +206,7 @@ const Pagination: React.FC<PaginationProps> = (props) => {
           onClick={preOmitPageChange}
         />,
         ,
-        ...Array.from({ length: 9 - 4 }).map((_, i) => {
+        ...Array.from({length: 9 - 4}).map((_, i) => {
           return (
             <li
               onClick={() => pageChange(i + currentPage - 2)}
@@ -254,12 +255,12 @@ const Pagination: React.FC<PaginationProps> = (props) => {
     return contentList;
   };
 
-  const { inputValue } = state;
-  const { showQuickJumper, showTotal, total } = props;
+  const {inputValue} = state;
+  const {showQuickJumper, showTotal, total} = props;
   return (
     <div className="page-container">
       {showTotal && (
-        <span style={{ color: `#333`, marginRight: `.5em`, marginLeft: `1em` }}>
+        <span style={{color: `#333`, marginRight: `.5em`, marginLeft: `1em`}}>
           共{total}条
         </span>
       )}
@@ -281,7 +282,8 @@ const Pagination: React.FC<PaginationProps> = (props) => {
 Pagination.defaultProps = {
   preBtnText: "<", //上一页的文本
   nextBtnText: ">", //下一页的文本
-  onPageChange: () => {}, //页码跳转回调
+  onPageChange: () => {
+  }, //页码跳转回调
   showQuickJumper: true, //是否展示快速跳转输入框
   showTotal: true, //是否展示总条数
 };

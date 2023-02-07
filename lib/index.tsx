@@ -17,11 +17,12 @@ const App = () => {
 
   return (
     <>
-      <Carousel autoplay>
+      <Carousel autoplay duration={1}>
         <div><img src={p1} alt={'item'}/></div>
         <div><img src={p2} alt={'item'}/></div>
         <div><img src={p3} alt={'item'}/></div>
       </Carousel>
+
       <Modal visible={visible} maskClosable onCancelClick={() => setVisible(false)} onOkClick={() => setVisible(false)}>
         <div>123</div>
       </Modal>
